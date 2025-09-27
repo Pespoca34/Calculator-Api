@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CalculatorService {
-    public int result(int a, int b, String operator){
+    public int calculating(int a, int b, String operator){
         String operatorUnder = operator.toLowerCase();
 
         if("sum".equals(operatorUnder)){
