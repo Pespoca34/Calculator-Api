@@ -47,4 +47,4 @@ Division (tratamento de divisão por zero lança erro no servidor):
 curl "http://localhost:8080/div?a=10&b=2"
 ```
 ---
-Feito por: 
+Feito por: Pedro Julião

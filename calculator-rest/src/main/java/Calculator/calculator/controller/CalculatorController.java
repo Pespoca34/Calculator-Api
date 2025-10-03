@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import Calculator.calculator.service.CalculatorService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import Calculator.calculator.kafka.CalculationRequest;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +15,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 @RestController
 public class CalculatorController {
+
+    private static final Logger logger = LoggerFactory.getLogger(CalculatorController.class);
 
     @Autowired
     private CalculatorService calculatorService;
@@ -28,7 +32,9 @@ public class CalculatorController {
         if (kafkaTemplate != null) {
             kafkaTemplate.send(kafkaTopic, new CalculationRequest("sum", a, b));
         }
-        return calculatorService.calculating("sum", a, b);
+        double result = calculatorService.calculating("sum", a, b);
+        logger.info("sum request: a={}, b={} => result={}", a, b, result);
+        return result;
     }
     
     @GetMapping("/sub")
@@ -36,7 +42,9 @@ public class CalculatorController {
         if (kafkaTemplate != null) {
             kafkaTemplate.send(kafkaTopic, new CalculationRequest("sub", a, b));
         }
-        return calculatorService.calculating("sub", a, b);
+        double result = calculatorService.calculating("sub", a, b);
+        logger.info("sub request: a={}, b={} => result={}", a, b, result);
+        return result;
     }
     
     @GetMapping("/div")
@@ -44,7 +52,9 @@ public class CalculatorController {
         if (kafkaTemplate != null) {
             kafkaTemplate.send(kafkaTopic, new CalculationRequest("div", a, b));
         }
-        return calculatorService.calculating("div", a, b);
+        double result = calculatorService.calculating("div", a, b);
+        logger.info("div request: a={}, b={} => result={}", a, b, result);
+        return result;
     }
     
     @GetMapping("/mult")
@@ -52,6 +62,8 @@ public class CalculatorController {
         if (kafkaTemplate != null) {
             kafkaTemplate.send(kafkaTopic, new CalculationRequest("mult", a, b));
         }
-        return calculatorService.calculating("mult", a, b);
+        double result = calculatorService.calculating("mult", a, b);
+        logger.info("mult request: a={}, b={} => result={}", a, b, result);
+        return result;
     }
 }
