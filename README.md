@@ -1,50 +1,52 @@
 # Calculator API
 
-Projeto multi-módulo (Maven) com duas partes principais:
-- `calculator-rest` — API REST baseada em Spring Boot (endpoints: /sum, /sub, /div, /mult)
-- `calculator-service` — módulo com a lógica de cálculo
+Multi-module Maven project with two main parts:
+- `calculator-rest` — Spring Boot REST API (endpoints: /sum, /sub, /div, /mult)
+- `calculator-service` — module that contains the calculation logic
 
-Requisitos de build
+Build requirements
 - Java 17
-- Maven (o projeto inclui o wrapper `mvnw`/`mvnw.cmd`)
-- Docker & Docker Compose (para rodar com Kafka via compose)
+- Maven (the project includes the wrapper `mvnw` / `mvnw.cmd`)
+- Docker & Docker Compose (to run Kafka with the compose file)
 
-Como construir
+How to build
 
-No Windows PowerShell (na raiz do projeto):
+From Windows PowerShell (project root):
 
 ```powershell
-# Compilar e empacotar ambos os módulos
+# Compile and package both modules
 cd C:\Users\pedro\Java\calculator
 .\mvnw.cmd -DskipTests package -pl calculator-service,calculator-rest -am
 ```
 
-Como rodar localmente (sem Docker)
+How to run locally (without Docker)
 
 ```powershell
-# Rodar a aplicação REST (a partir do módulo calculator-rest)
+# Run the REST application (from the calculator-rest module)
 cd C:\Users\pedro\Java\calculator\calculator-rest
 java -jar target\calculator-rest-0.0.1-SNAPSHOT.jar
-# A API estará disponível por padrão em http://localhost:8080
+# The API will be available by default at http://localhost:8080
 ```
 
-Como rodar com Docker Compose (inclui Kafka)
+How to run with Docker Compose (includes Kafka)
 
 ```powershell
 cd C:\Users\pedro\Java\calculator
-# Subir Zookeeper, Kafka e a aplicação (imagem será construída a partir do Dockerfile)
+# Start Zookeeper, Kafka and the application (the image will be built from the Dockerfile)
 docker-compose up --build
 ```
-Exemplos de requisições
+
+Request examples
 
 Sum:
 ```powershell
 curl "http://localhost:8080/sum?a=3&b=2"
 ```
 
-Division (tratamento de divisão por zero lança erro no servidor):
+Division (division by zero is handled and returns an error):
 ```powershell
 curl "http://localhost:8080/div?a=10&b=2"
 ```
+
 ---
-Feito por: Pedro Julião
+Made by: Pedro Julião
