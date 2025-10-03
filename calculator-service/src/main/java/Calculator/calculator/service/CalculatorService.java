@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CalculatorService {
-    public int calculating(String operator, int a, int b){
+    public double calculating(String operator, double a, double b){
         String operatorUnder = operator.toLowerCase();
 
         switch (operatorUnder){
@@ -13,7 +13,7 @@ public class CalculatorService {
             case "sub":
                 return a - b;
             case "div":
-                if (b == 0) {
+                if (b == 0.0) {
                     throw new IllegalArgumentException("Cannot divide by zero");
                 }
                 return a / b;

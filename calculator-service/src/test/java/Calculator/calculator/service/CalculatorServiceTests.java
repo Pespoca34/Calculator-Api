@@ -9,9 +9,9 @@ public class CalculatorServiceTests {
     public void shouldAdd(){
         CalculatorService calculatorService = new CalculatorService();
         String operator = "sum";
-        
-        int result = calculatorService.calculating(operator, 3, 2);
-        
+
+        double result = calculatorService.calculating(operator, 3, 2);
+
         assertEquals(5, result);
     }
 
@@ -19,9 +19,9 @@ public class CalculatorServiceTests {
     public void shouldSubtract(){
         CalculatorService calculatorService = new CalculatorService();
         String operator = "sub";
-        
-        int result = calculatorService.calculating(operator, 5, 3);
-        
+
+        double result = calculatorService.calculating(operator, 5, 3);
+
         assertEquals(2, result);
     }
 
@@ -30,7 +30,7 @@ public class CalculatorServiceTests {
         CalculatorService calculatorService = new CalculatorService();
         String operator = "div";
 
-        int result = calculatorService.calculating(operator, 10, 2);
+        double result = calculatorService.calculating(operator, 10, 2);
 
         assertEquals(5, result);
     }
@@ -40,7 +40,7 @@ public class CalculatorServiceTests {
         CalculatorService calculatorService = new CalculatorService();
         String operator = "mult";
 
-        int result = calculatorService.calculating(operator, 3, 2);
+        double result = calculatorService.calculating(operator, 3, 2);
 
         assertEquals(6, result);
     }
@@ -56,4 +56,17 @@ public class CalculatorServiceTests {
             assertEquals("Cannot divide by zero", e.getMessage());
         }
     }
+
+    @Test
+    public void shouldInvalidOperator(){
+        CalculatorService calculatorService = new CalculatorService();
+        String operator = "invalid";
+
+        try{
+            calculatorService.calculating(operator,5, 3);
+        } catch (IllegalArgumentException e){
+            assertEquals("Invalid operator", e.getMessage());
+        }
+    }
+
 }
